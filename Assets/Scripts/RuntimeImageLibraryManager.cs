@@ -7,10 +7,10 @@ using UnityEngine.XR.ARSubsystems;
 public class RuntimeImageLibraryManager : MonoBehaviour
 {
     public ARTrackedImageManager imageManager;
-
     void Start()
     {
     }
+
 
     public IEnumerator AddImageAtRuntime(Texture2D runtimeTexture, string textureName)
     {
@@ -30,7 +30,7 @@ public class RuntimeImageLibraryManager : MonoBehaviour
             var jobHandle = library.ScheduleAddImageWithValidationJob(
                 runtimeTexture,
                 textureName,
-                null
+                0.2f
             );
 
             while (!jobHandle.jobHandle.IsCompleted)
@@ -39,6 +39,10 @@ public class RuntimeImageLibraryManager : MonoBehaviour
             jobHandle.jobHandle.Complete();
 
             Debug.Log("Image added to runtime library!");
+
+            imageManager.enabled = false;
+            imageManager.referenceLibrary = library;
+            imageManager.enabled = true;
         }
         else
         {
