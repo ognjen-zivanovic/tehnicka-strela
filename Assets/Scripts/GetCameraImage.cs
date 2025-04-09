@@ -77,8 +77,8 @@ public class GetCameraImage : MonoBehaviour
         Debug.Log("WIDTH: " + width + " HEIGHT: " + height);
 
         Vector4 cropAmount = cropBoxController.GetCropAmounts();
-        int cropX = (int)cropAmount.x;
-        int cropY = (int)cropAmount.z;
+        int cropX = (int)cropAmount.x * width;
+        int cropY = (int)cropAmount.y * height;
 
         int newWidth = width - 2 * cropX;
         int newHeight = height - 2 * cropY;

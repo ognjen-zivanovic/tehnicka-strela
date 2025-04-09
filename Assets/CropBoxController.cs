@@ -47,6 +47,11 @@ public class CropBoxController : MonoBehaviour, IDragHandler, IBeginDragHandler
         float bottom = cropCorners[0].y - canvasCorners[0].y;
         float top = canvasCorners[2].y - cropCorners[2].y;
 
-        return new Vector4(left, right, top, bottom);
+        float percentageLeft = left / canvasCorners[2].x;
+        float percentageRight = right / canvasCorners[2].x;
+        float percentageTop = top / canvasCorners[2].y;
+        float percentageBottom = bottom / canvasCorners[2].y;
+
+        return new Vector4(percentageLeft, percentageRight, percentageTop, percentageBottom);
     }
 }
